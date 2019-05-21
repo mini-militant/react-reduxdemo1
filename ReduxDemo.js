@@ -8,6 +8,7 @@ const reducer =(state,action)=>{
   if(action.type==="ATTACK"){
     return action.payload;
   }
+  return state;
 }
 
 //Step 1: Store :reducer and state

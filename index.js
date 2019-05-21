@@ -13,17 +13,27 @@ const initialState={
 
 //it takes the current state and an action and returns NewState
 function reducer(state=initialState,action){
-  console.log('reducer',state,action);
+  if(action.type==="ADD_ITEM"){
+    return action.item;
+    
+  }
   return state;
 }
+
+
 
 const store=createStore(reducer);
 {
   type:"ADD_ITEM"
   item:"APPLE"
 }
+store.subscribe(()=>{
+  console.log("Item:",store.getState())
+})
 //every call to dispatch results in call to reducer.
-store.dispatch({type:"ADD_ITEM"})
+store.dispatch({type:"ADD_ITEM" ,item:"APPLE"})
+
+
 
 class App extends Component {
   constructor() {
