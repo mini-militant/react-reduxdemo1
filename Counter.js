@@ -35,5 +35,9 @@ reset=()=>{
     )
   }
 }
+{/*
+    Connect function actually injects "dispatch" function as a prop.
+    So we just need to call the "dispatch" function
+*/} 
 
 export default connect(mapStateToProps)(Counter)
