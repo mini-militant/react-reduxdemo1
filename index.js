@@ -10,7 +10,8 @@ import {Provider} from 'react-redux'
 
 //reducer needs to return the initial value when called for the first time
 const initialState={
-  count:0
+  count:0,
+  results:[]
 };
 
 //it takes the current state and an action and returns NewState
@@ -19,16 +20,25 @@ function reducer(state=initialState,action){
   switch(action.type){
     case 'INCREMENT':
     return{
+      ...state,
       count:state.count+1
-    };
+    }
     case 'DECREMENT':
     return{
+      ...state,
       count:state.count-1
-    };
+    }
     case 'RESET':
     return{
+      ...state,
       count:0
-    };
+    }
+
+    case 'STORE_RESULT':
+      return{
+        ...state,
+        results: state.results.concat({id:new Date(),value:state.count})
+      }
     default:
      return state;
   }

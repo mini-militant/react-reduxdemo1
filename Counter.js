@@ -4,11 +4,7 @@ import {connect} from 'react-redux'
 // Takes entire redux state and is expected to return an object where the
 // keys are prop name and the values are prop values.
 // Thus creating a mapping of "state" into "props".
-function mapStateToProps(state){
-  return{
-    count:state.count
-  }
-}
+
 
 class Counter extends React.Component{
 
@@ -20,8 +16,18 @@ class Counter extends React.Component{
       <button onClick={this.props.onDecrement}>-</button>
       <span> {this.props.count} </span>
       <button onClick={this.props.onIncrement}>+</button>
+      <br/>
       <button onClick={this.props.onReset}>RESET</button>
-      
+      <hr/>
+      <button onClick={this.props.onStoreResult}>Store Result</button>
+      <ul>
+        {
+          this.props.storedResults.map(strResult=>(
+            <li key={strResult.id} onClick={this.props.onDeleteResult}>{strResult.value}</li>
+          ))
+        }
+        
+      </ul>
       </div>
     )
   }
@@ -35,7 +41,15 @@ const mapDispatchToProps = dispatch =>{
   return{
     onIncrement : ()=>dispatch({type:'INCREMENT'}),
     onDecrement : ()=>dispatch({type:'DECREMENT'}),
-    onReset: ()=>dispatch({type:'RESET'})
+    onReset: ()=>dispatch({type:'RESET'}),
+    onStoreResult : ()=>dispatch({type:'STORE_RESULT'}),
+    onDeleteResult : ()=>dispatch({type:'DELETE_RESULT'})
+  }
+}
+const  mapStateToProps=(state)=>{
+  return{
+    count:state.count,
+    storedResults:state.results
   }
 }
 
