@@ -7,9 +7,6 @@ import {connect} from 'react-redux'
 
 
 class Counter extends React.Component{
-
- 
-
   render(){
     return(
       <div>
@@ -19,14 +16,13 @@ class Counter extends React.Component{
       <br/>
       <button onClick={this.props.onReset}>RESET</button>
       <hr/>
-      <button onClick={this.props.onStoreResult}>Store Result</button>
+      <button onClick={()=>this.props.onStoreResult(this.props.count)}>Store Result</button>
       <ul>
         {
           this.props.storedResults.map(strResult=>(
             <li key={strResult.id} onClick={()=>this.props.onDeleteResult(strResult.id)}>{strResult.value}</li>
           ))
-        }
-        
+        }        
       </ul>
       </div>
     )
@@ -42,14 +38,15 @@ const mapDispatchToProps = dispatch =>{
     onIncrement : ()=>dispatch({type:'INCREMENT'}),
     onDecrement : ()=>dispatch({type:'DECREMENT'}),
     onReset: ()=>dispatch({type:'RESET'}),
-    onStoreResult : ()=>dispatch({type:'STORE_RESULT'}),
+    onStoreResult : (result)=>dispatch({type:'STORE_RESULT',result:result}),
     onDeleteResult : (id)=>dispatch({type:'DELETE_RESULT',resultElId:id})
   }
 }
 const  mapStateToProps=(state)=>{
+  
   return{
-    count:state.count,
-    storedResults:state.results
+    count:state.ctr.count,
+    storedResults:state.strResults.results
   }
 }
 
