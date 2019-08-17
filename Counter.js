@@ -11,25 +11,16 @@ function mapStateToProps(state){
 }
 
 class Counter extends React.Component{
-  increment = () => {
-  this.props.dispatch({ type: "INCREMENT" });
-};
 
-decrement = () => {
-  this.props.dispatch({ type: "DECREMENT" });
-};
-
-reset=()=>{
-  this.props.dispatch({type:"RESET"})
-}
+ 
 
   render(){
     return(
       <div>
-      <button onClick={this.decrement}>-</button>
+      <button onClick={this.props.onDecrement}>-</button>
       <span> {this.props.count} </span>
-      <button onClick={this.increment}>+</button>
-      <button onClick={this.reset}>RESET</button>
+      <button onClick={this.props.onIncrement}>+</button>
+      <button onClick={this.props.onReset}>RESET</button>
       
       </div>
     )
@@ -40,4 +31,12 @@ reset=()=>{
     So we just need to call the "dispatch" function
 */} 
 
-export default connect(mapStateToProps)(Counter)
+const mapDispatchToProps = dispatch =>{
+  return{
+    onIncrement : ()=>dispatch({type:'INCREMENT'}),
+    onDecrement : ()=>dispatch({type:'DECREMENT'}),
+    onReset: ()=>dispatch({type:'RESET'})
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Counter)
