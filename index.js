@@ -16,7 +16,7 @@ const initialState={
 
 //it takes the current state and an action and returns NewState
 function reducer(state=initialState,action){
-  console.log('reducer',state,action);
+  
   switch(action.type){
     case 'INCREMENT':
     return{
@@ -39,6 +39,13 @@ function reducer(state=initialState,action){
         ...state,
         results: state.results.concat({id:new Date(),value:state.count})
       }
+
+    case 'DELETE_RESULT':
+    const updatedResult=state.results.filter(result=>result.id!==action.resultElId)
+    return{
+      ...state,
+      results : updatedResult
+    }
     default:
      return state;
   }
@@ -46,9 +53,7 @@ function reducer(state=initialState,action){
 
 const store=createStore(reducer);
 
-store.subscribe(()=>{
-  console.log("Count:",store.getState())
-})
+
 
 {/*
 every call to dispatch results in call to reducer.
