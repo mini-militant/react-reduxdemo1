@@ -1,5 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import * as actionType from './actions/actionTypes'
+import * as actionCreator from './actions/actionCreator'
 
 // Takes entire redux state and is expected to return an object where the
 // keys are prop name and the values are prop values.
@@ -35,11 +37,11 @@ class Counter extends React.Component{
 
 const mapDispatchToProps = dispatch =>{
   return{
-    onIncrement : ()=>dispatch({type:'INCREMENT'}),
-    onDecrement : ()=>dispatch({type:'DECREMENT'}),
-    onReset: ()=>dispatch({type:'RESET'}),
-    onStoreResult : (result)=>dispatch({type:'STORE_RESULT',result:result}),
-    onDeleteResult : (id)=>dispatch({type:'DELETE_RESULT',resultElId:id})
+    onIncrement : ()=>dispatch(actionCreator.increment()),
+    onDecrement : ()=>dispatch(actionCreator.decrement()),
+    onReset: ()=>dispatch(actionCreator.reset()),
+    onStoreResult : (result)=>dispatch(actionCreator.storeResult(result)),
+    onDeleteResult : (id)=>dispatch(actionCreator.deleteResult(id))
   }
 }
 const  mapStateToProps=(state)=>{
