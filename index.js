@@ -6,8 +6,9 @@ import ReduxDemo from "./ReduxDemo"
 import Counter from "./Counter" 
 import counterReducer from './reducers/count'
 import resultReducer from './reducers/results'
-import {createStore,combineReducers} from 'redux'
+import {createStore,combineReducers,applyMiddleware} from 'redux'
 import {Provider} from 'react-redux'
+import thunk from 'redux-thunk'
 
 
 //reducer needs to return the initial value when called for the first time
@@ -16,7 +17,7 @@ const rootReducer=combineReducers({
   strResults:resultReducer
 })
 
-const store=createStore(rootReducer);
+const store=createStore(rootReducer,applyMiddleware(thunk));
 
 class App extends Component {
   
